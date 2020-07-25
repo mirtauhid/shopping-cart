@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="minusButton" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="counter" type="text" class="form-control text-center" value="1">
+                           <button id="plusButton" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$<span id="phonePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="minusButtonTwo" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="counterTwo" type="text" class="form-control text-center" value="1">
+                           <button  id="plusButtonTwo" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="casePrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -59,14 +59,14 @@
 
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
-                        <h5>Tax:</h5>
+                        <h5>Tax(12%):</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subTotal">1,278</span></h5>
+                        <h5>$ <span id="tax">153</span> </h5>
+                        <h5>$ <span id="total">1431</span></h5>
                      </div>
                   </div>
                </div>
@@ -78,5 +78,143 @@
       </div>
    </section>
 </body>
+
+<script>
+   let count = 1;
+
+   // plusButtonOne
+   const plusButton = document.getElementById("plusButton");
+   plusButton.addEventListener("click", function(){
+      const counter = document.getElementById("counter").value;
+      const counterNumber = parseFloat(counter);
+      count++;
+      document.getElementById("counter").value = count;
+      
+      document.getElementById("phonePrice").innerText = 1219 * count;
+      const phonePrice = document.getElementById("phonePrice").innerText;
+
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subTotalNumber = parseFloat(subTotal);
+      const phonePriceNumber = parseFloat(phonePrice);
+      const casePrice = document.getElementById("casePrice").innerText;
+      const casePriceFloat = parseFloat(casePrice);
+      const subTotalCurrent = phonePriceNumber + casePriceFloat;
+      document.getElementById("subTotal").innerText = subTotalCurrent;
+
+      const tax = document.getElementById("tax").innerText;
+      const taxNumber = parseFloat(tax);
+      const caseTax = (casePriceFloat * 12) / 100;
+      const phoneTax = (phonePriceNumber * 12) / 100;
+      const taxTotal = caseTax + phoneTax;
+      document.getElementById("tax").innerText = parseInt(taxTotal);
+      
+      const total = document.getElementById("total").innerText;
+      const totalNumber = parseFloat(total);
+      const currentTotal = subTotalCurrent + taxTotal;
+      document.getElementById("total").innerText = parseInt(currentTotal);
+   })
+
+   // minusButtonOne
+   const minusButton = document.getElementById("minusButton");
+   minusButton.addEventListener("click", function(){
+      const counter = document.getElementById("counter").value;
+      const counterNumber = parseFloat(counter);
+      count--;
+      document.getElementById("counter").value = count;
+
+      document.getElementById("phonePrice").innerText = 1219 * count;
+      const phonePrice = document.getElementById("phonePrice").innerText;
+
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subTotalNumber = parseFloat(subTotal);
+      const phonePriceNumber = parseFloat(phonePrice);
+      const casePrice = document.getElementById("casePrice").innerText;
+      const casePriceFloat = parseFloat(casePrice);
+      const subTotalCurrent = phonePriceNumber + casePriceFloat;
+      document.getElementById("subTotal").innerText = subTotalCurrent;
+      
+      const tax = document.getElementById("tax").innerText;
+      const taxNumber = parseFloat(tax);
+      const caseTax = (casePriceFloat * 12) / 100;
+      const phoneTax = (phonePriceNumber * 12) / 100;
+      const taxTotal = caseTax + phoneTax;
+      document.getElementById("tax").innerText = parseInt(taxTotal);
+
+      const total = document.getElementById("total").innerText;
+      const totalNumber = parseFloat(total);
+      const currentTotal = subTotalCurrent + taxTotal;
+      document.getElementById("total").innerText = parseInt(currentTotal);
+   })
+
+   // plusButtonTwo
+   const plusButtonTwo = document.getElementById("plusButtonTwo");
+   plusButtonTwo.addEventListener("click", function(){
+      const counter = document.getElementById("counterTwo").value;
+      const counterNumber = parseFloat(counterTwo);
+      count++;
+      document.getElementById("counterTwo").value = count;
+
+      document.getElementById("casePrice").innerText = 59 * count;
+      const casePrice = document.getElementById("casePrice").innerText;
+
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subTotalNumber = parseFloat(subTotal);
+      const casePriceNumber = parseFloat(casePrice);
+      const phonePrice = document.getElementById("phonePrice").innerText;
+      const phonePriceFloat = parseFloat(phonePrice);
+      const subTotalCurrent = casePriceNumber + phonePriceFloat;
+      document.getElementById("subTotal").innerText = subTotalCurrent;
+
+      const tax = document.getElementById("tax").innerText;
+      const taxNumber = parseFloat(tax);
+      const caseTax = (casePriceNumber * 12) / 100;
+      const phoneTax = (phonePriceFloat * 12) / 100;
+      const taxTotal = caseTax + phoneTax;
+      document.getElementById("tax").innerText = parseInt(taxTotal);
+
+      const total = document.getElementById("total").innerText;
+      const totalNumber = parseFloat(total);
+      const currentTotal = subTotalCurrent + taxTotal;
+      document.getElementById("total").innerText = parseInt(currentTotal);
+   })
+
+   // minusButtonTwo
+   const minusButtonTwo = document.getElementById("minusButtonTwo");
+   minusButtonTwo.addEventListener("click", function(){
+      const counter = document.getElementById("counterTwo").value;
+      const counterNumber = parseFloat(counterTwo);
+      count--;
+      document.getElementById("counterTwo").value = count;
+
+      document.getElementById("casePrice").innerText = 59 * count;
+      const casePrice = document.getElementById("casePrice").innerText;
+
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subTotalNumber = parseFloat(subTotal);
+      const casePriceNumber = parseFloat(casePrice);
+      const phonePrice = document.getElementById("phonePrice").innerText;
+      const phonePriceFloat = parseFloat(phonePrice);
+      const subTotalCurrent = casePriceNumber + phonePriceFloat;
+      document.getElementById("subTotal").innerText = subTotalCurrent;
+
+      const tax = document.getElementById("tax").innerText;
+      const taxNumber = parseFloat(tax);
+      const caseTax = (casePriceNumber * 12) / 100;
+      const phoneTax = (phonePriceFloat * 12) / 100;
+      const taxTotal = caseTax + phoneTax;
+      document.getElementById("tax").innerText = parseInt(taxTotal);
+
+      const total = document.getElementById("total").innerText;
+      const totalNumber = parseFloat(total);
+      const currentTotal = subTotalCurrent + taxTotal;
+      document.getElementById("total").innerText = parseInt(currentTotal);
+   })
+
+   
+   
+   
+
+
+</script>
 
 </html>
